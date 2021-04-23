@@ -1,0 +1,58 @@
+<body>
+    <style>
+        body{
+            background-color: #333;
+        }
+        #input_phone {
+            padding: 1em;
+        }
+    </style>
+   
+    <label>
+        <input type="text" 
+        id="input_phone" 
+        placeholder="enter phone..."
+        onkeyup="inputAdjust()"
+        >
+    </label>
+
+    <script>
+        // 1. input.value -> value from input (String)
+        // 2. when working wits Strings .method() -> xerox -> with modifications
+        // "abc".toUpperCase() -> "ABC"
+        // 3. acceptable format xxx-yyy-zzz (input masking)
+        // 4. auto trim spaces
+        // 5. reject anything besides (0..9 - )
+        // 6. HW1: LIMIT the input xxx-yyy-zzz
+        // 7. HW2*: permanent PREFIX 022-
+        
+        function inputAdjust() {
+            console.log(event.key)
+            let phone = input_phone.value // String
+            phone = phone.trim() 
+            let lastC = phone[phone.length - 1]
+            if(lastC < "0" || lastC > "9") {
+                phone = phone.substring(0, phone.length - 1)
+            }
+            if(phone.length <= 2){
+                phone = "022"   
+            }
+            if( phone.length == 3 || phone.length == 7 ) {
+                phone += "-"
+            }
+            
+            if(phone.length >= 12){
+                phone = phone.substring(0, phone.length - 1)  
+            }
+            
+            switch (event.key){
+            case "Backspace":   
+            if(phone.length == 3) {phone = ""} else {return} ;  
+                 break }
+
+
+            input_phone.value = phone
+
+        }
+    </script>
+</body>
